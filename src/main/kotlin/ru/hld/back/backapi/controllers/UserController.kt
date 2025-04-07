@@ -23,8 +23,8 @@ class UserController @Autowired constructor(
     fun getUser(@RequestParam(name = "name") name: String): ResponseEntity<User> {
         val user = userService.userByLogin(name)
 
-
         return if (user != null) {
+            user.password = ""
             ResponseEntity.ok(user)
         } else {
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()

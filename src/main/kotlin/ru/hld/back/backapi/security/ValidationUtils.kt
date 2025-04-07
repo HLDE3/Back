@@ -11,27 +11,16 @@ object ValidationUtils {
         Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+=-])[\\w!@#$%^&*()_+=-]{8,30}$")
 
     fun isValidUsername(username: String?): Boolean {
-
-        if (username.isNullOrBlank()) {
-            return false
+        return when {
+            username.isNullOrBlank() || !USERNAME_PATTERN.matcher(username).matches() -> false
+            else -> true
         }
-
-        if (!USERNAME_PATTERN.matcher(username).matches()) {
-            return false
-        }
-
-        return true
     }
 
     fun isValidPassword(password: String?): Boolean {
-        if (password.isNullOrBlank()) {
-            return false
+        return when {
+            password.isNullOrBlank() || !PASSWORD_PATTERN.matcher(password).matches() -> false
+            else -> true
         }
-
-        if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            return false
-        }
-
-        return true
     }
 }
